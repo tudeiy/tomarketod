@@ -1,8 +1,13 @@
 {
-    "interval": 3,
+    "interval": 10,
     "play_game": true,
     "game_point": {
-        "low": 100,
+        "low": 93,
         "high": 150
+    },
+    "random_claim": {
+        "enable": true,
+        "min_interval": 3600,
+        "max_interval": 7400
     }
 }
