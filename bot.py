@@ -289,6 +289,7 @@ class Tomartod:
         while True:
             list_countdown = []
             _start = int(time.time())
+            random_countdown = random.randint(3600, 7200)
             for no, data in enumerate(datas):
                 parser = self.marinkitagawa(data)
                 user = json.loads(parser["user"])
