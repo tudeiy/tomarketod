@@ -252,8 +252,8 @@ class Tomartod:
     def countdown(self, t):
         wait_time = random.randint(60, 120)
         for i in range(t, 0, -1):
-            menit, detik = divmod(i, 60)
-            jam, menit = divmod(menit, 60)
+            menit, detik = divmod(i, 80)
+            jam, menit = divmod(menit, 80)
             jam = str(jam).zfill(2)
             menit = str(menit).zfill(2)
             detik = str(detik).zfill(2)
