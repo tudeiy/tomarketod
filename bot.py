@@ -251,8 +251,8 @@ class Tomartod:
 
     def countdown(self, t):
         for i in range(t, 0, -1):
-            menit, detik = divmod(i, 10)
-            jam, menit = divmod(menit, 10)
+            menit, detik = divmod(i, 60)
+            jam, menit = divmod(menit, 50)
             jam = str(jam).zfill(2)
             menit = str(menit).zfill(2)
             detik = str(detik).zfill(2)
