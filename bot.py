@@ -78,6 +78,18 @@ class Tomartod:
         )
         self.log(f"{hijau}success start farming !")
 
+    def end_farming(self):
+        data = json.dumps({"game_id": "53b22103-c7ff-413d-bc63-20f6fb806a07"})
+        url = "https://api-web.tomarket.ai/tomarket-game/v1/farm/claim"
+        res = self.http(url, self.headers, data)
+        if res.status_code != 200:
+            self.log(f"{merah}failed start farming, check http.log last line !")
+            return False
+
+        poin = res.json()["data"]["claim_this_time"]
+        self.log(f"{hijau}success claim farming !")
+        self.log(f"{hijau}reward : {putih}{poin}")
+
     def daily_claim(self):
         url = "https://api-web.tomarket.ai/tomarket-game/v1/daily/claim"
         data = json.dumps({"game_id": "fa873d13-d831-4d6f-8aee-9cff7a1d0db1"})
@@ -240,7 +252,7 @@ class Tomartod:
     def countdown(self, t):
         for i in range(t, 0, -1):
             menit, detik = divmod(i, 60)
-            jam, menit = divmod(menit, 50)
+            jam, menit = divmod(menit, 60)
             jam = str(jam).zfill(2)
             menit = str(menit).zfill(2)
             detik = str(detik).zfill(2)
@@ -277,7 +289,6 @@ class Tomartod:
         while True:
             list_countdown = []
             _start = int(time.time())
-            random_countdown = random.randint(3600, 7200)
             for no, data in enumerate(datas):
                 parser = self.marinkitagawa(data)
                 user = json.loads(parser["user"])
