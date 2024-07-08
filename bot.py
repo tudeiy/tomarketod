@@ -249,16 +249,15 @@ class Tomartod:
                 time.sleep(1)
                 continue
 
-    def countdown(self, t):
-        wait_time = random.randint(60, 120)
-        for i in range(t, 0, -1):
-            menit, detik = divmod(i, 80)
-            jam, menit = divmod(menit, 80)
-            jam = str(jam).zfill(2)
-            menit = str(menit).zfill(2)
-            detik = str(detik).zfill(2)
-            print(f"{putih}waiting {jam}:{menit}:{detik}     ", flush=True, end="\r")
-            time.sleep(1)
+    def countdown(self):
+        min_minutes = 60  # Minimal countdown dalam menit (misalnya, 1 jam)
+        max_minutes = 120  # Maksimal countdown dalam menit (misalnya, 2 jam)
+        
+        wait_time = random.randint(min_minutes, max_minutes)  # Acak antara min_minutes hingga max_minutes menit
+        print(f"{putih}waiting for {wait_time} minutes... ", flush=True, end="\r")
+        time.sleep(wait_time * 60)  # Mengubah menit menjadi detik dengan mengalikan dengan 60
+
+        # Hapus baris ini jika Anda tidak ingin pesan dihapus setelah countdown selesai
         print("                                        ", flush=True, end="\r")
 
     def log(self, msg):
