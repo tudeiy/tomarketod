@@ -202,8 +202,8 @@ class Tomartod:
         self.play_game = config["play_game"]
         self.game_low_point = config["game_point"]["low"]
         self.game_high_point = config["game_point"]["high"]
-        self.countdown_min_time = config.get("countdown_min_time", 3600)  # Default to 25 if not provided
-        self.countdown_max_time = config.get("countdown_max_time", 7200)  # Default to 35 if not provided
+        self.countdown_min_time = config.get("countdown_min_time", 3600)
+        self.countdown_max_time = config.get("countdown_max_time", 7200)  
         
     def save(self, id, token):
         tokens = json.loads(open("tokens.json").read())
