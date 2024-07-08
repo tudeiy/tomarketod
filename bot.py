@@ -35,10 +35,7 @@ class Tomartod:
             "sec-fetch-dest": "empty",
             "referer": "https://mini-app.tomarket.ai/",
             "accept-language": "en-US,en;q=0.9",
-            
         }
-        self.countdown_min_time = None
-        self.countdown_max_time = None
         self.marinkitagawa = lambda data: {
             key: value[0] for key, value in parse_qs(data).items()
         }
@@ -135,7 +132,7 @@ class Tomartod:
                 continue
 
             self.log(f"{hijau}success {biru}claim{hijau} game point : {putih}{point}")
-        
+
     def get_balance(self):
         url = "https://api-web.tomarket.ai/tomarket-game/v1/user/balance"
         while True:
@@ -202,9 +199,7 @@ class Tomartod:
         self.play_game = config["play_game"]
         self.game_low_point = config["game_point"]["low"]
         self.game_high_point = config["game_point"]["high"]
-        self.countdown_min_time = config.get("countdown_min_time", 3600)
-        self.countdown_max_time = config.get("countdown_max_time", 7200)  
-        
+
     def save(self, id, token):
         tokens = json.loads(open("tokens.json").read())
         tokens[str(id)] = token
@@ -254,8 +249,7 @@ class Tomartod:
                 time.sleep(1)
                 continue
 
-    def countdown(self, min_time, max_time):
-        t = random.randint(min_time, max_time)
+    def countdown(self, t):
         for i in range(t, 0, -1):
             menit, detik = divmod(i, 60)
             jam, menit = divmod(menit, 60)
@@ -277,7 +271,7 @@ class Tomartod:
     {hijau}By: {putih}t.me/AkasakaID
     {hijau}GIthub: {putih}@AkasakaID
     
-    {hijau}Message: {putih}don't forget to 'git pull' maybe the script is updated 
+    {hijau}Message: {putih}dont't forget to 'git pull' maybe the script is updated 
     
         """
         arg = argparse.ArgumentParser()
@@ -318,14 +312,12 @@ class Tomartod:
                 self.set_authorization(token)
                 result = self.get_balance()
                 print(line)
-                min_time = self.countdown_min_time
-                max_time = self.countdown_max_time
-                self.countdown(min_time, max_time)
+                self.countdown(self.interval)
                 list_countdown.append(result)
             _end = int(time.time())
             _tot = _end - _start
             _min = min(list_countdown) - _tot
-            self.countdown(_min, _min + 5)
+            self.countdown(_min)
 
 
 if __name__ == "__main__":
