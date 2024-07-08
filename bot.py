@@ -250,15 +250,26 @@ class Tomartod:
                 continue
 
     def countdown(self, t):
-        for i in range(t, 0, -1):
-            menit, detik = divmod(i, 60)
-            jam, menit = divmod(menit, 60)
-            jam = str(jam).zfill(2)
-            menit = str(menit).zfill(2)
-            detik = str(detik).zfill(2)
-            print(f"{putih}waiting {jam}:{menit}:{detik}     ", flush=True, end="\r")
-            time.sleep(1)
-        print("                                        ", flush=True, end="\r")
+        # Generate random time between 1 hour (3600 seconds) and 2 hours (7200 seconds)
+        random_time = random.randint(3600, 7200)
+
+        # Convert random_time to hours, minutes, and seconds
+        hours, remainder = divmod(random_time, 3600)
+        minutes, seconds = divmod(remainder, 60)
+
+        # Format hours, minutes, and seconds as strings with leading zeros if needed
+        hours_str = str(hours).zfill(2)
+        minutes_str = str(minutes).zfill(2)
+        seconds_str = str(seconds).zfill(2)
+
+        # Print the waiting message
+        print(f"waiting {hours_str}:{minutes_str}:{seconds_str}", flush=True, end="\r")
+
+        # Sleep for the random_time duration
+        time.sleep(random_time)
+
+        # Clear the waiting message after sleeping
+        print(" " * 50, flush=True, end="\r")
 
     def log(self, msg):
         now = datetime.now().isoformat(" ").split(".")[0]
