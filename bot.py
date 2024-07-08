@@ -249,15 +249,15 @@ class Tomartod:
                 time.sleep(1)
                 continue
 
-    def countdown(self, t_min, t_max):
-    wait_time = random.randint(t_min * 3600, t_max * 7200)  # Mengubah jam menjadi detik
+    def countdown(self):
+    wait_time = 7200  # 2 hours in seconds
     for i in range(wait_time, 0, -1):
         hours, remainder = divmod(i, 3600)
         minutes, seconds = divmod(remainder, 60)
         hours = str(hours).zfill(2)
         minutes = str(minutes).zfill(2)
         seconds = str(seconds).zfill(2)
-        print(f"{putih}waiting {hours}:{minutes}:{seconds}     ", flush=True, end="\r")
+        print(f"{self.putih}waiting {hours}:{minutes}:{seconds}     ", flush=True, end="\r")
         time.sleep(1)
     print("                                        ", flush=True, end="\r")
 
