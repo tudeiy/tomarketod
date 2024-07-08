@@ -133,6 +133,19 @@ class Tomartod:
 
             self.log(f"{hijau}success {biru}claim{hijau} game point : {putih}{point}")
 
+    def random_claim(self):
+        config = json.loads(open("config.json").read())
+        if not config.get("random_claim", {}).get("enable", False):
+            return
+
+        min_interval = config["random_claim"]["min_interval"]
+        max_interval = config["random_claim"]["max_interval"]
+        interval = random.randint(min_interval, max_interval)
+        
+        self.log(f"{kuning}waiting for random claim interval: {interval} seconds")
+        self.countdown(interval)
+        self.get_balance()
+        
     def get_balance(self):
         url = "https://api-web.tomarket.ai/tomarket-game/v1/user/balance"
         while True:
@@ -179,6 +192,9 @@ class Tomartod:
                 if int(play_pass) > 0:
                     self.play_game_func(play_pass)
                     continue
+
+             if config.get("random_claim", {}).get("enable", False):
+            self.random_claim()
 
             _next = end_farming - timestamp
             return _next
