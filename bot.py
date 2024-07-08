@@ -249,17 +249,16 @@ class Tomartod:
                 time.sleep(1)
                 continue
 
-    def countdown(self):
-    wait_time = 7200  # 2 hours in seconds
-    for i in range(wait_time, 0, -1):
-        hours, remainder = divmod(i, 3600)
-        minutes, seconds = divmod(remainder, 60)
-        hours = str(hours).zfill(2)
-        minutes = str(minutes).zfill(2)
-        seconds = str(seconds).zfill(2)
-        print(f"{self.putih}waiting {hours}:{minutes}:{seconds}     ", flush=True, end="\r")
-        time.sleep(1)
-    print("                                        ", flush=True, end="\r")
+    def countdown(self, t):
+        for i in range(t, 0, -1):
+            menit, detik = divmod(i, 10)
+            jam, menit = divmod(menit, 10)
+            jam = str(jam).zfill(2)
+            menit = str(menit).zfill(2)
+            detik = str(detik).zfill(2)
+            print(f"{putih}waiting {jam}:{menit}:{detik}     ", flush=True, end="\r")
+            time.sleep(1)
+        print("                                        ", flush=True, end="\r")
 
     def log(self, msg):
         now = datetime.now().isoformat(" ").split(".")[0]
